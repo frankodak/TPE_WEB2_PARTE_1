@@ -1,0 +1,12 @@
+<?php
+    include_once 'db.php';
+?>
+    
+    <h2 class="fs-3 fw-bold mt-5 ms-5">Generos</h2>
+    <ul class="nav justify-content-start ms-5 mt-4 d-inline-flex gap-3">
+        <?php foreach ($generos as $genero): ?>
+            <li class="nav-item">
+                <button type="button" class="btn btn-outline-primary"><?php echo $genero ?></button>
+            </li>
+        <?php endforeach; ?>
+    </ul>

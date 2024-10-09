@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2024 at 02:22 PM
+-- Generation Time: Oct 09, 2024 at 10:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,7 +40,12 @@ CREATE TABLE `libros` (
 --
 
 INSERT INTO `libros` (`id_libro`, `nombre`, `autor`, `resena`, `genero`) VALUES
-(1, 'Cien Años de Soledad', 'Gabriel García Márquez', 'Cien años de soledad es una obra maestra de Gabriel García Márquez que nos transporta a través de generaciones y nos sumerge en un mundo mágico y surrealista lleno de personajes inolvidables y situaciones extraordinarias. La novela es una reflexión profunda sobre la historia, el amor, la soledad, la memoria y el destino. García Márquez entrelaza la historia personal de una familia con la historia colectiva de Latinoamérica, ofreciendo una visión mágica y a la vez dolorosamente real de la humanidad', 'Realismo Mágico');
+(1, 'Cien Años de Soledad', 'Gabriel García Márquez', 'Cien años de soledad es una obra maestra de Gabriel García Márquez que nos transporta a través de generaciones y nos sumerge en un mundo mágico y surrealista lleno de personajes inolvidables y situaciones extraordinarias. La novela es una reflexión profunda sobre la historia, el amor, la soledad, la memoria y el destino. García Márquez entrelaza la historia personal de una familia con la historia colectiva de Latinoamérica, ofreciendo una visión mágica y a la vez dolorosamente real de la humanidad', 'Realismo Mágico'),
+(2, 'El nombre de la rosa', 'Umberto Eco', 'Una novela histórica que combina misterio, filosofía y crítica literaria en un monasterio italiano del siglo XIV.', 'Ficción'),
+(3, 'El origen de las especies', 'Charles Darwin', 'La obra fundamental de la biología evolutiva que propone la teoría de la evolución por selección natural.', 'Ciencia'),
+(4, 'Harry Potter y la piedra filos', 'J.K. Rowling', 'La primera entrega de la saga de Harry Potter, donde un niño descubre que es un mago y empieza su educación en Hogwarts.', 'Fantasía'),
+(5, 'Cumbres borrascosas', 'Emily Brontë', 'Un clásico de la literatura inglesa que narra la tumultuosa relación entre Heathcliff y Catherine Earnshaw.', 'Romántica'),
+(6, 'El arte de la guerra', 'Sun Tzu', 'Un antiguo tratado militar chino que ofrece estrategias sobre la guerra y el liderazgo, aplicable a diversas áreas de la vida.', 'Filosofía');
 
 --
 -- Indexes for dumped tables
@@ -60,7 +65,7 @@ ALTER TABLE `libros`
 -- AUTO_INCREMENT for table `libros`
 --
 ALTER TABLE `libros`
-  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
