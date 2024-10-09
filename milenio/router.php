@@ -1,0 +1,32 @@
+<?php
+    include_once 'function.router.php';
+
+    if(!empty($_GET['action'])){
+        $action = $_GET['action'];
+    } else {
+        $action = 'home';
+    }
+
+    $params = explode('/', $action);
+    
+    switch ($params[0]) {
+        case 'home':
+            showHome();
+            break;
+        case 'login':
+            showLogin();
+            break;
+        case 'addCatalogo':
+            showAddCatalogo();
+            break;
+        case 'detail':
+            if(isset($params[1])){
+                showDetail($params[1]);
+            }
+            break;   
+        default:
+            echo '404 NOT FOUND';
+            break;
+    }
+
+?>
