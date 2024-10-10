@@ -23,3 +23,9 @@
         include_once 'templates/addCatalogo.phtml';
         include_once 'templates/layout/footer.phtml';
     }
+
+    function showError(){
+        include_once 'templates/layout/header.phtml';
+        include_once 'templates/layout/error.phtml';
+        include_once 'templates/layout/footer.phtml';
+    }

@@ -28,7 +28,7 @@
             }
             break;   
         default:
-            echo '404 NOT FOUND';
+            showError();
             break;
     }
 
