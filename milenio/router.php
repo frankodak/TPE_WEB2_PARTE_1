@@ -1,10 +1,15 @@
 <?php
-    include_once 'function.router.php';
+    require_once 'libs/response.php';
+    require_once 'app/middlewares/session.auth.middleware.php';
+    require_once 'app/middlewares/verify.auth.middleware.php';
+    require_once 'app/controllers/auth.controller.php';
+    require_once 'app/controllers/catalogo.controller.php';
 
     define('BASE_URL', '//'.$_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']).'/');
 
+    $res = new Response();
 
-    if(!empty($_GET['action'])){
+    if (!empty($_GET['action'])) {
         $action = $_GET['action'];
     } else {
         $action = 'home';
@@ -14,22 +19,38 @@
     
     switch ($params[0]) {
         case 'home':
-            showHome();
+            sessionAuthMiddleware($res);
+            $controller = new CatalogoController($res);
+            $controller->showLibros();
+            break;
+        case 'showLogin':
+            $controller = new AuthController();
+            $controller->showLogin();
             break;
         case 'login':
-            showLogin();
+            $controller = new AuthController();
+            $controller->login();
+            break;
+        case 'logout':
+            $controller = new AuthController();
+            $controller->logout();
             break;
         case 'addCatalogo':
-            showAddCatalogo();
+            sessionAuthMiddleware($res);
+            $controller = new CatalogoController($res);
+            $controller->addCatalogo();
             break;
         case 'detail':
-            if(isset($params[1])){
-                showDetail($params[1]);
+            sessionAuthMiddleware($res);
+            if (isset($params[1])) {
+                $controller = new CatalogoController($res);
+                $controller->showDetail($params[1]);
+            } else {
+                $controller->showError();
             }
-            break;   
+            break;
         default:
-            showError();
+            $controller->showError();
             break;
     }
-
 ?>

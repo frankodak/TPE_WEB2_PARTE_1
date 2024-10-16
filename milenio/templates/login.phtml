@@ -8,24 +8,32 @@
         </head>
         <nav class="navbar bg-body-tertiary px-3">
             <div class="container-fluid">
-                <a class="navbar-brand fw-bold" href="../router.php/?action=home">
-                    <img src="../images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                <a class="navbar-brand fw-bold" href="home">
+                <img src="<?php echo BASE_URL; ?>images/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
                     Milenio
                 </a>
             </div>
         </nav>
     <body>
         <div class="container-sm mt-5">
-            <form>
+            <form method="POST" action="login">
                 <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" aria-describedby="emailHelp">
                 </div>
                 <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <label class="form-label">Password</label>
+                    <input type="password" name="password" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Iniciar sesion</button>
             </form> 
+            <?php if ($error): ?>
+                <div class='alert alert-danger' role='alert'>
+                    <?= $error ?>
+                </div>
+            <?php endif ?>
         </div>
+    
+<?php require 'templates/layout/footer.phtml' ?>
+    
 

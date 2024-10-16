@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2024 at 02:52 PM
+-- Generation Time: Oct 16, 2024 at 04:52 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -45,7 +45,8 @@ INSERT INTO `libros` (`id_libro`, `nombre`, `autor`, `resena`, `genero`) VALUES
 (3, 'El origen de las especies', 'Charles Darwin', 'La obra fundamental de la biología evolutiva que propone la teoría de la evolución por selección natural.', 'Ciencia'),
 (4, 'Harry Potter y la piedra filosofal', 'J.K. Rowling', 'La primera entrega de la saga de Harry Potter, donde un niño descubre que es un mago y empieza su educación en Hogwarts.', 'Fantasía'),
 (5, 'Cumbres borrascosas', 'Emily Brontë', 'Un clásico de la literatura inglesa que narra la tumultuosa relación entre Heathcliff y Catherine Earnshaw.', 'Romántica'),
-(6, 'El arte de la guerra', 'Sun Tzu', 'Un antiguo tratado militar chino que ofrece estrategias sobre la guerra y el liderazgo, aplicable a diversas áreas de la vida.', 'Filosofía');
+(6, 'El arte de la guerra', 'Sun Tzu', 'Un antiguo tratado militar chino que ofrece estrategias sobre la guerra y el liderazgo, aplicable a diversas áreas de la vida.', 'Filosofía'),
+(8, 'El Principito', 'Antoine de Saint-Exupéry', 'La obra de Antoine de Saint-Exupéry es la historia de un piloto que estando en el desierto se encuentra con un pequeño príncipe que proviene de otro planeta. Este príncipe (o principito) es un pequeño niño rubio muy peculiar. El curioso personaje le describe sus aventuras por diferentes planetas y por la tierra, y le permite experimentar una serie de enseñanzas muy especiales sobre la vida.\r\n\r\nSe cuentan anécdotas en siete planetas diferentes (el planeta del principito conocido como el asteroide B-612 y seis planetas donde El Principito se cuestiona mucho sobre el comportamiento de los adultos) y sus aventuras en el Planeta tierra donde el pequeño tiene encuentros con diferentes personajes entre los que se destacan una enigmática serpiente, el piloto narrador y un zorro muy singular.', 'Fantasía');
 
 -- --------------------------------------------------------
 
@@ -56,8 +57,8 @@ INSERT INTO `libros` (`id_libro`, `nombre`, `autor`, `resena`, `genero`) VALUES
 CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(225) NOT NULL,
   `rol` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf16 COLLATE=utf16_spanish_ci;
 
@@ -92,7 +93,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT for table `libros`
 --
 ALTER TABLE `libros`
-  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_libro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `usuarios`
