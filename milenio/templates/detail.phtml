@@ -7,10 +7,12 @@
             <h6 class="card-subtitle mb-2 text-body-secondary"><?php echo $libro->autor; ?></h6>
             <p class="card-text"><?php echo $libro->resena; ?></p>
             <span class="badge bg-info"><?php echo $libro->genero; ?></span>
-            <div class="mt-3">
-                <a href="#" class="card-link btn btn-primary">Editar</a>
-                <a href="#" class="card-link btn btn-danger">Eliminar</a>
-            </div>
+            <?php if(isset($_SESSION['email'])): ?>
+                <div class="mt-3">
+                    <a href="#" class="card-link btn btn-primary">Editar</a>
+                    <a href="#" class="card-link btn btn-danger">Eliminar</a>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>

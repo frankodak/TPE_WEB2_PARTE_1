@@ -44,7 +44,6 @@ class CatalogoController {
             echo 'Falta completar el título';
         }
     
-    
         $nombre = $_POST['nombre'];
         $autor = $_POST['autor'];
         $resena = $_POST['resena'];
