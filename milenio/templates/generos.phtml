@@ -1,16 +1,12 @@
 <?php
     include_once './app/models/catalogo.model.php';
 ?>
-    
-    <?php if(isset($_SESSION['email'])): ?>
-        <div class="mx-5 mt-5">
-            <h2 class="fs-3 fw-bold mb-4">Administrar catalogo</h2>
-            <ul class="nav justify-content-start d-inline-flex gap-3">
-                <a href="addCatalogo"><button type="button" class="btn btn-primary">Agregar Genero</button></a>
-                <a href="addCatalogo"><button type="button" class="btn btn-primary">Agregar Libro</button></a>
-            </ul>
-        </div>
-    <?php endif; ?>
+    <div class="mx-5 mt-5">
+        <?php if(isset($_SESSION['email'])): ?>
+                    <a href="addCatalogo"><button type="button" class="btn btn-primary">Agregar Genero</button></a>
+                    <a href="addCatalogo"><button type="button" class="btn btn-primary">Agregar Libro</button></a>
+        <?php endif; ?>
+    </div>
     
     <h2 class="fs-3 fw-bold mt-5 ms-5">Generos</h2>
     <ul class="nav justify-content-start ms-5 mt-4 d-inline-flex gap-3">
