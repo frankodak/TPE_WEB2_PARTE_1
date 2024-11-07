@@ -3,16 +3,21 @@
 <div class="d-flex justify-content-center mt-4">
     <div class="card" style="width: 90%;">
         <div class="card-body">
-            <h4 class="card-title mb-3 fw-bold"><?php echo $libro->nombre; ?></h4>
+            <h4 class="card-title mb-3 fw-bold"><?php echo $libro->titulo; ?></h4>
             <h6 class="card-subtitle mb-2 text-body-secondary"><?php echo $libro->autor; ?></h6>
-            <p class="card-text"><?php echo $libro->resena; ?></p>
-            <span class="badge bg-info"><?php echo $libro->genero; ?></span>
-            <div class="mt-3">
-                <a href="#" class="card-link btn btn-primary">Editar</a>
-                <a href="#" class="card-link btn btn-danger">Eliminar</a>
-            </div>
+            <p class="card-text"><?php echo $libro->reseña; ?></p>
+            <span class="badge bg-info"><?php echo $libro->genero_nombre; ?></span>
+            <?php if(isset($_SESSION['email'])): ?>
+                <div class="mt-3">
+                    <a href="#" class="card-link btn btn-primary">Editar</a>
+                    <form action="eliminar" method="POST" style="display:inline;">
+                        <input type="hidden" name="id" value="<?php echo $libro->id; ?>">
+                        <button type="submit" class="card-link btn btn-danger">Eliminar</button>
+                    </form>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
 
-<?php require 'templates/layout/footer.phtml'; ?>
+<?php require 'templates/layout/footer.phtml';?>

@@ -44,6 +44,18 @@
             $controller = new CatalogoController($res);
             $controller->addCatalogo();
             break;
+        case 'addLibro':
+            $controller = new CatalogoController($res);
+            $controller->addLibro();
+            break;
+        case 'addGenero':
+            $controller = new CatalogoController($res);
+            $controller->addGenero();
+            break;
+        case 'eliminar':
+            $controller = new CatalogoController($res);
+            $controller->deleteLibro();
+            break;
         case 'detail':
             sessionAuthMiddleware($res);
             if (isset($params[1])) {

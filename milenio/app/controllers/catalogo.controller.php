@@ -1,21 +1,24 @@
 <?php
-require_once './app/models/catalogo.model.php';
-require_once './app/views/catalogo.view.php';
+    require_once './app/models/libro.model.php';
+    require_once './app/models/genero.model.php';
+    require_once './app/views/catalogo.view.php';
 
 
 class CatalogoController {
-    private $model;
+    private $modelLibro;
+    private $modelGenero;
     private $view;
     private $user;
 
     public function __construct($res) {
-        $this->model = new CatalogoModel();
+        $this->modelLibro = new LibroModel();
+        $this->modelGenero = new GeneroModel();
         $this->user = isset($_SESSION['EMAIL_USER']) ? $_SESSION['EMAIL_USER'] : null;
         $this->view = new CatalogoView($this->user);
     }
     
     public function showDetail($id) {
-        $libro = $this->model->getLibro($id);
+        $libro = $this->modelLibro->getLibro($id);
         if ($libro) {
             $this->view->showDetail($libro);
         } else {
@@ -25,14 +28,14 @@ class CatalogoController {
     
     
     public function addCatalogo() { 
-        $generos = $this->model->getGeneros();
+        $generos = $this->modelGenero->getGeneros();
         include_once 'templates/addCatalogo.phtml';
     }
     
 
     public function showLibros() {
-        $generos = $this->model->getGeneros();
-        $libros = $this->model->getLibros();
+        $generos = $this->modelGenero->getGeneros();
+        $libros = $this->modelLibro->getLibros();
         include_once 'templates/layout/header.phtml';
         include_once 'templates/generos.phtml';
         include_once 'templates/catalogo.phtml';
@@ -40,35 +43,54 @@ class CatalogoController {
     }
 
     public function addLibro() {
-        if (!isset($_POST['nombre']) || empty($_POST['nombre'])) {
-            echo 'Falta completar el título';
+        if (!empty($_POST['titulo'])) {
+            echo 'Falta completar el titulo';
         }
     
-    
-        $nombre = $_POST['nombre'];
+        $titulo = $_POST['titulo'];
         $autor = $_POST['autor'];
-        $resena = $_POST['resena'];
-        $genero = $_POST['genero'];
+        $reseña = $_POST['reseña'];
+        $nombre = $_POST['genero_nombre'];
     
-        $id = $this->model->insertLibro($nombre, $autor, $resena,$genero);
+        $id = $this->modelLibro->insertLibro($titulo, $autor, $reseña, $nombre);
 
         header('Location: ' . BASE_URL);
     }
 
     
-    public function deleteLibro($id) {
-        $libro = $this->model->getLibro($id);
+    public function deleteLibro() {
+        if (isset($_POST['id'])) {
+            $id = $_POST['id']; 
+            $libro = $this->modelLibro->getLibro($id);
+    
+            if (!$libro) {
+                echo "No existe el libro con el id=$id";
+                return;
+            }
 
-        if (!$libro) {
-            echo "No existe la tarea con el id=$id";
+            $this->modelLibro->eraseLibro($id);
+
+            header('Location: ' . BASE_URL);
         }
-        $this->model->eraseLibro($id);
-
-        header('Location: ' . BASE_URL);
+            else {
+                echo "ID no proporcionado.";
+            }
     }
 
     function showError(){
         include_once 'templates/layout/error.phtml';
+    }
+
+    public function addGenero() {
+        if (!empty($_POST['genero'])) {
+            echo 'Falta completar el genero';
+        }
+    
+        $genero = $_POST['genero'];
+    
+        $id = $this->modelGenero->insertGenero($genero);
+
+        header('Location: ' . BASE_URL);
     }
 
 }

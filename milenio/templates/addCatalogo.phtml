@@ -1,11 +1,12 @@
 <?php 
     require 'templates/layout/header.phtml' ;
-    include_once './app/models/catalogo.model.php';
+    include_once './app/models/libro.model.php';
+    include_once './app/models/genero.model.php';
 ?>
 
 <div class="container-sm mt-5">
     <h2 class="fs-3 fw-bold mt-5 mb-3">Agregar Genero</h2>
-    <form>
+    <form class="mb-5" action="addGenero" method="POST">
     <div class="mb-3">
         <label class="form-label">Nuevo Genero</label>
         <input type="text" class="form-control" name="genero" aria-describedby=""> 
@@ -16,10 +17,10 @@
 
 <div class="container-sm mt-5">
     <h2 class="fs-3 fw-bold mt-5 mb-3">Agregar libro</h2>
-    <form class="mb-5">
+    <form class="mb-5" action="addLibro" method="POST">
     <div class="mb-3">
-        <label class="form-label">Nombre nuevo libro</label>
-        <input type="text" class="form-control" name="nombre" aria-describedby=""> 
+        <label class="form-label">Titulo del libro</label>
+        <input type="text" class="form-control" name="titulo" aria-describedby=""> 
     </div>
     <div class="mb-3">
         <label class="form-label">Autor</label>
@@ -27,16 +28,16 @@
     </div>
     <?php
         echo '<label class="form-label">Categoria</label>';
-        echo '<select class="form-select mb-3" aria-label="Default select example" name="categoria">';
+        echo '<select class="form-select mb-3" aria-label="Default select example" name="genero_nombre">';
         echo '<option selected>Seleccione una categoria</option>';
         foreach ($generos as $genero) {
-            echo '<option value="' . $genero. '">' . $genero. '</option>';    }
+            echo '<option value="' . $genero->nombre. '">' . $genero->nombre. '</option>';    }
 
         echo '</select>';
     ?>
     <div class="mb-3">
         <label class="form-label">Reseña</label>
-        <textarea class="form-control" name="resena" rows="3"></textarea>
+        <textarea class="form-control" name="reseña" rows="3"></textarea>
     </div>
     <button type="submit" class="btn btn-primary">Agregar</button>
     </form>

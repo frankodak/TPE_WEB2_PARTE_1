@@ -1,6 +1,6 @@
 <?php
 
-class CatalogoModel {
+class LibroModel {
     private $db;
 
     public function __construct() {
@@ -12,32 +12,22 @@ class CatalogoModel {
         $query->execute();
 
         $libros = $query->fetchAll(PDO::FETCH_OBJ); 
-    
+
         return $libros;
     }
-
  
     public function getLibro($id) {    
-        $query = $this->db->prepare('SELECT * FROM libros WHERE id_libro = ?');
+        $query = $this->db->prepare('SELECT * FROM libros WHERE id = ?');
         $query->execute([$id]);   
     
         $libros = $query->fetch(PDO::FETCH_OBJ);
     
         return $libros;
     }
-
-    public function getGeneros() {
-        $query = $this->db->prepare('SELECT DISTINCT genero FROM libros');
-        $query->execute();
-    
-        $generos = $query->fetchAll(PDO::FETCH_COLUMN);
-        
-        return $generos;
-    }
  
-    public function insertLibro($nombre, $autor, $resena, $genero) { 
-        $query = $this->db->prepare('INSERT INTO libros(nombre, autor, resena, genero) VALUES (?, ?, ?, ?)');
-        $query->execute([$nombre, $autor, $resena, $genero]);
+    public function insertLibro($titulo, $autor, $reseña, $genero_nombre) { 
+        $query = $this->db->prepare('INSERT INTO libros(titulo, autor, reseña, genero_nombre) VALUES (?, ?, ?, ?)');
+        $query->execute([$titulo, $autor, $reseña, $genero_nombre]);
     
         $id = $this->db->lastInsertId();
     
@@ -45,9 +35,8 @@ class CatalogoModel {
     }
  
     public function eraseLibro($id) {
-        $query = $this->db->prepare('DELETE FROM libros WHERE id_libro = ?');
+        $query = $this->db->prepare('DELETE FROM libros WHERE id = ?');
         $query->execute([$id]);
     }
 
-    
 }

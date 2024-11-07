@@ -4,7 +4,7 @@ class UserModel {
     private $db;
 
     public function __construct() {
-       $this->db = new PDO('mysql:host=localhost;dbname=milenio_db;charset=utf8', 'root', '');
+       $this->db = new PDO('mysql:host=localhost;dbname=milenio;charset=utf8', 'root', '');
     }
 
     public function getUserByEmail($email) {    

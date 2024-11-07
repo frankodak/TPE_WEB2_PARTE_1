@@ -1,5 +1,6 @@
     <?php
-        include_once './app/models/catalogo.model.php';
+        include_once './app/models/libro.model.php';
+        include_once './app/models/genero.model.php';
     ?>
     
     <div class="mx-5">
@@ -7,7 +8,7 @@
         <table class="table mt-5">
             <thead>
                 <tr>
-                    <th scope="col">#</th><th scope="col">Libro</th><th scope="col">Autor</th><th scope="col">Genero</th><th scope="col">Detalle</th>
+                    <th scope="col">Libro</th><th scope="col">Autor</th><th scope="col">Genero</th><th scope="col">Detalle</th>
                 </tr>
             </thead>
             <tbody>
@@ -15,12 +16,11 @@
                     foreach($libros as $libro){
                         echo '
                             <tr>
-                                <th scope="row">' . $libro->id_libro . '</th>
-                                <td>' . $libro->nombre . '</td>
+                                <td>' . $libro->titulo . '</td>
                                 <td>' . $libro->autor . '</td>
-                                <td>' . $libro->genero . '</td>
+                                <td>' . $libro->genero_nombre . '</td>
                                 <td class="d-inline-flex gap-3">
-                                    <a href="detail/' . $libro->id_libro . '">
+                                    <a href="detail/' . $libro->id . '">
                                         <button type="button" class="btn btn-outline-primary btn-sm">Ver mas</button>
                                     </a>
                                 </td>
