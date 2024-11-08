@@ -1,23 +1,31 @@
 <?php
-    include_once './app/models/genero.model.php';
+include_once './app/models/genero.model.php';
 ?>
-    
-    <?php if(isset($_SESSION['email'])): ?>
-        <div class="mx-5 mt-5">
-            <h2 class="fs-3 fw-bold mb-4">Administrar catalogo</h2>
-            <ul class="nav justify-content-start d-inline-flex gap-3">
-                <a href="addCatalogo"><button type="button" class="btn btn-primary">Agregar Genero</button></a>
-                <a href="addCatalogo"><button type="button" class="btn btn-primary">Agregar Libro</button></a>
-            </ul>
-        </div>
-    <?php endif; ?>
-    
-    <h2 class="fs-3 fw-bold mt-5 ms-5">Generos</h2>
-    <ul class="nav justify-content-start ms-5 mt-4 d-inline-flex gap-3">
-        <button type="button" class="btn btn-outline-primary">Ver Todos</button>
-        <?php foreach ($generos as $genero): ?>
-            <li class="nav-item">
-                <button type="button" class="btn btn-outline-primary"><?php echo $genero->nombre ?></button>
-            </li>
-        <?php endforeach; ?>
-    </ul>
+
+<?php if(isset($_SESSION['email'])): ?>
+    <div class="mx-5 mt-5">
+        <h2 class="fs-3 fw-bold mb-4">Administrar catalogo</h2>
+        <ul class="nav justify-content-start d-inline-flex gap-3">
+            <a href="addCatalogo"><button type="button" class="btn btn-primary">Agregar Genero</button></a>
+            <a href="addCatalogo"><button type="button" class="btn btn-primary">Agregar Libro</button></a>
+        </ul>
+    </div>
+<?php endif; ?>
+
+<h2 class="fs-3 fw-bold mt-5 ms-5">Generos</h2>
+<ul class="nav justify-content-start ms-5 mt-4 d-inline-flex gap-3">
+    <!-- Botón "Ver Todos" que elimina el filtro de género -->
+    <li class="nav-item">
+        <a href="home"><button type="button" class="btn btn-outline-primary">Ver Todos</button></a>
+    </li>
+    <?php foreach ($generos as $genero): ?>
+        <!-- Botones para cada género, al hacer clic redirige con el filtro de ese género -->
+        <li class="nav-item">
+            <a href="home?genero=<?= urlencode($genero->nombre) ?>">
+                <button type="button" class="btn btn-outline-primary">
+                    <?php echo $genero->nombre ?>
+                </button>
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ul>

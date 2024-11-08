@@ -29,18 +29,25 @@ class CatalogoController {
     
     public function addCatalogo() { 
         $generos = $this->modelGenero->getGeneros();
-        include_once 'templates/addCatalogo.phtml';
+        include_once 'templates/form_alta.phtml';
     }
     
 
     public function showLibros() {
+        $generoSeleccionado = isset($_GET['genero']) ? $_GET['genero'] : null;
         $generos = $this->modelGenero->getGeneros();
-        $libros = $this->modelLibro->getLibros();
+        if ($generoSeleccionado) {
+            $libros = $this->modelLibro->getLibrosPorGenero($generoSeleccionado);
+        } else {
+            $libros = $this->modelLibro->getLibros();
+        }
+    
         include_once 'templates/layout/header.phtml';
         include_once 'templates/generos.phtml';
         include_once 'templates/catalogo.phtml';
         include_once 'templates/layout/footer.phtml';
     }
+    
 
     public function addLibro() {
         if (!empty($_POST['titulo'])) {
@@ -76,6 +83,33 @@ class CatalogoController {
                 echo "ID no proporcionado.";
             }
     }
+    
+    public function editLibro($id) {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['titulo'], $_POST['autor'], $_POST['reseña'], $_POST['genero_nombre'])) {
+                $titulo = $_POST['titulo'];
+                $autor = $_POST['autor'];
+                $reseña = $_POST['reseña'];
+                $genero_nombre = $_POST['genero_nombre'];
+
+                (new LibroModel())->editLibro($id, $titulo, $autor, $reseña, $genero_nombre);
+    
+                header('Location: ' . BASE_URL);
+                exit();
+            } else {
+                echo "Faltan datos en el formulario.";
+            }
+        } else {
+            $libro = (new LibroModel())->getLibro($id);
+            $generos = (new GeneroModel())->getGeneros();
+            if ($libro) {
+                require 'templates/form_edit.phtml';
+            } else {
+                $this->showError();
+            }
+        }
+    }
+    
 
     function showError(){
         include_once 'templates/layout/error.phtml';

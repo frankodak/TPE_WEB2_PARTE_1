@@ -56,6 +56,14 @@
             $controller = new CatalogoController($res);
             $controller->deleteLibro();
             break;
+        case 'editar':
+            if (isset($params[1])) {
+                $controller = new CatalogoController($res);
+                $controller->editLibro($params[1]);
+            } else {
+                $controller->showError();
+            }
+            break;
         case 'detail':
             sessionAuthMiddleware($res);
             if (isset($params[1])) {

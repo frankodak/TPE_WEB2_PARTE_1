@@ -39,4 +39,21 @@ class LibroModel {
         $query->execute([$id]);
     }
 
+    public function editLibro($id, $titulo, $autor, $reseña, $genero_nombre) {
+        $query = $this->db->prepare('
+            UPDATE libros 
+            SET titulo = ?, autor = ?, reseña = ?, genero_nombre = ? 
+            WHERE id = ?
+        ');
+        $query->execute([$titulo, $autor, $reseña, $genero_nombre, $id]);
+    }
+
+    public function getLibrosPorGenero($generoNombre) {
+        $query = $this->db->prepare('SELECT * FROM libros WHERE genero_nombre = ?');
+        $query->execute([$generoNombre]);
+        
+        $libros = $query->fetchAll(PDO::FETCH_OBJ); 
+        return $libros;
+    }
+    
 }
