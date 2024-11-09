@@ -27,9 +27,9 @@
         <input type="text" class="form-control" name="autor" aria-describedby=""> 
     </div>
     <?php
-        echo '<label class="form-label">Categoria</label>';
+        echo '<label class="form-label">Genero</label>';
         echo '<select class="form-select mb-3" aria-label="Default select example" name="genero_nombre">';
-        echo '<option selected>Seleccione una categoria</option>';
+        echo '<option selected>Seleccione un genero</option>';
         foreach ($generos as $genero) {
             echo '<option value="' . $genero->nombre. '">' . $genero->nombre. '</option>';    }
 
