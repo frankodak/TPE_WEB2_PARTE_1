@@ -2,7 +2,7 @@
 include_once './app/models/genero.model.php';
 ?>
 
-<?php if(isset($_SESSION['email'])): ?>
+<?php if (isset($_SESSION['email'])): ?>
     <div class="mx-5 mt-5">
         <h2 class="fs-3 fw-bold mb-4">Administrar catalogo</h2>
         <ul class="nav justify-content-start d-inline-flex gap-3">
@@ -14,12 +14,10 @@ include_once './app/models/genero.model.php';
 
 <h2 class="fs-3 fw-bold mt-5 ms-5">Generos</h2>
 <ul class="nav justify-content-start ms-5 mt-4 d-inline-flex gap-3">
-    <!-- Botón "Ver Todos" que elimina el filtro de género -->
     <li class="nav-item">
         <a href="home"><button type="button" class="btn btn-outline-primary">Ver Todos</button></a>
     </li>
     <?php foreach ($generos as $genero): ?>
-        <!-- Botones para cada género, al hacer clic redirige con el filtro de ese género -->
         <li class="nav-item">
             <a href="home?genero=<?= urlencode($genero->nombre) ?>">
                 <button type="button" class="btn btn-outline-primary">
@@ -29,3 +27,11 @@ include_once './app/models/genero.model.php';
         </li>
     <?php endforeach; ?>
 </ul>
+<?php if ($generoDetalle): ?>
+    <div class="ms-4">
+        <div class="bg-light p-4 rounded shadow-sm">
+            <h3 class="fs-4 fw-bold text-primary"><?php echo $generoDetalle->nombre; ?></h3>
+            <p class="text-muted"><?php echo $generoDetalle->descripcion; ?></p>
+        </div>
+    </div>
+<?php endif; ?>

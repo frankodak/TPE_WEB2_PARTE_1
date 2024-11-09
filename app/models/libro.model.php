@@ -7,8 +7,13 @@ class LibroModel {
        $this->db = new PDO('mysql:host=localhost;dbname=milenio_db;charset=utf8', 'root', '');
     }
  
+
     public function getLibros() {
-        $query = $this->db->prepare('SELECT * FROM libros');
+        $query = $this->db->prepare('
+            SELECT libros.*, generos.nombre AS genero_nombre, generos.descripcion AS genero_descripcion 
+            FROM libros
+            JOIN generos ON libros.genero_id = generos.id
+        ');
         $query->execute();
 
         $libros = $query->fetchAll(PDO::FETCH_OBJ); 
@@ -16,18 +21,26 @@ class LibroModel {
         return $libros;
     }
  
-    public function getLibro($id) {    
-        $query = $this->db->prepare('SELECT * FROM libros WHERE id = ?');
-        $query->execute([$id]);   
+    public function getLibro($id) {
+        $query = $this->db->prepare('
+            SELECT libros.*, generos.nombre AS genero_nombre 
+            FROM libros 
+            LEFT JOIN generos ON libros.genero_id = generos.id 
+            WHERE libros.id = ?
+        ');
+        $query->execute([$id]);
     
-        $libros = $query->fetch(PDO::FETCH_OBJ);
+        $libro = $query->fetch(PDO::FETCH_OBJ);
     
-        return $libros;
+        return $libro;
     }
- 
-    public function insertLibro($titulo, $autor, $reseña, $genero_nombre) { 
-        $query = $this->db->prepare('INSERT INTO libros(titulo, autor, reseña, genero_nombre) VALUES (?, ?, ?, ?)');
-        $query->execute([$titulo, $autor, $reseña, $genero_nombre]);
+
+    public function insertLibro($titulo, $autor, $reseña, $genero_id) { 
+        $query = $this->db->prepare('
+            INSERT INTO libros(titulo, autor, reseña, genero_id) 
+            VALUES (?, ?, ?, ?)
+        ');
+        $query->execute([$titulo, $autor, $reseña, $genero_id]);
     
         $id = $this->db->lastInsertId();
     
@@ -39,21 +52,25 @@ class LibroModel {
         $query->execute([$id]);
     }
 
-    public function editLibro($id, $titulo, $autor, $reseña, $genero_nombre) {
+    public function editLibro($id, $titulo, $autor, $reseña, $genero_id) {
         $query = $this->db->prepare('
             UPDATE libros 
-            SET titulo = ?, autor = ?, reseña = ?, genero_nombre = ? 
+            SET titulo = ?, autor = ?, reseña = ?, genero_id = ? 
             WHERE id = ?
         ');
-        $query->execute([$titulo, $autor, $reseña, $genero_nombre, $id]);
+        $query->execute([$titulo, $autor, $reseña, $genero_id, $id]);
     }
 
-    public function getLibrosPorGenero($generoNombre) {
-        $query = $this->db->prepare('SELECT * FROM libros WHERE genero_nombre = ?');
-        $query->execute([$generoNombre]);
+    public function getLibrosPorGenero($generoId) {
+        $query = $this->db->prepare('
+            SELECT libros.*, generos.nombre AS genero_nombre, generos.descripcion AS genero_descripcion
+            FROM libros
+            JOIN generos ON libros.genero_id = generos.id
+            WHERE generos.id = ?
+        ');
+        $query->execute([$generoId]);
         
         $libros = $query->fetchAll(PDO::FETCH_OBJ); 
         return $libros;
-    }
-    
+    }  
 }

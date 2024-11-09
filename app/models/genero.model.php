@@ -25,22 +25,25 @@ class GeneroModel {
         return $generosId;
     }
 
-    public function getGeneroNombre($genero_id) {
-        $query = $this->db->prepare('SELECT nombre FROM generos WHERE id = ?');
-        $query->execute([$genero_id]);
-
-        $genero = $query->fetch(PDO::FETCH_OBJ);
-
-        return $genero ? $genero->nombre : 'Desconocido';
+    public function getGeneroPorNombre($nombre) {
+        $query = $this->db->prepare('SELECT * FROM generos WHERE nombre = ?');
+        $query->execute([$nombre]);
+        return $query->fetch(PDO::FETCH_OBJ);
     }
 
-    public function insertGenero($nombre) { 
-        $query = $this->db->prepare('INSERT INTO generos(nombre) VALUES (?)');
+    public function getGeneroDetallePorNombre($nombre) {
+        $query = $this->db->prepare('SELECT * FROM generos WHERE nombre = ?');
         $query->execute([$nombre]);
+        
+        return $query->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function insertGenero($nombre, $descripcion) { 
+        $query = $this->db->prepare('INSERT INTO generos(nombre, descripcion) VALUES (?, ?)');
+        $query->execute([$nombre, $descripcion]);
     
         $id = $this->db->lastInsertId();
     
         return $id;
-    }
-
+    }    
 }

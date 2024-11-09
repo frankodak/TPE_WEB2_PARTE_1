@@ -1,4 +1,4 @@
-![Diagrama](/tablas.jpg)
+![Diagrama](/der.png)
 
 La base de datos que construimos es de una biblioteca donde se permite guardar los libros que tiene, los usuarios que hay y los prestamos que se hacen
 tiene 3 tablas:
