@@ -33,11 +33,10 @@
     </div>
     <?php
         echo '<label class="form-label">Genero</label>';
-        echo '<select class="form-select mb-3" aria-label="Default select example" name="genero_nombre">';
-        echo '<option selected>Seleccione un genero</option>';
+        echo '<select class="form-select mb-3" aria-label="Default select example" name="genero_id" required>';
+        echo '<option value="" selected disabled>Seleccione un genero</option>';
         foreach ($generos as $genero) {
-            echo '<option value="' . $genero->nombre. '">' . $genero->nombre. '</option>';    }
-
+            echo '<option value="' . $genero->id . '">' . $genero->nombre. '</option>';    }
         echo '</select>';
     ?>
     <div class="mb-3">

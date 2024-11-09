@@ -4,7 +4,10 @@ class GeneroModel {
     private $db;
 
     public function __construct() {
-       $this->db = new PDO('mysql:host=localhost;dbname=milenio_db;charset=utf8', 'root', '');
+        $this->db = new PDO(
+            "mysql:host=".MYSQL_HOST .
+            ";dbname=".MYSQL_DB.";charset=utf8", 
+            MYSQL_USER, MYSQL_PASS);
     }
 
     public function getGeneros() {
@@ -45,5 +48,23 @@ class GeneroModel {
         $id = $this->db->lastInsertId();
     
         return $id;
-    }    
+    }   
+
+    public function editGenero($id, $nombre, $descripcion) {
+        $query = $this->db->prepare('
+            UPDATE generos 
+            SET nombre = ?, descripcion = ? 
+            WHERE id = ?
+        ');
+        $query->execute([$nombre, $descripcion, $id]);
+    }
+
+    public function deleteGenero($id) {
+        $query = $this->db->prepare('
+            DELETE FROM generos WHERE id = ?
+        ');
+        $query->execute([$id]);
+    }
+
+    
 }

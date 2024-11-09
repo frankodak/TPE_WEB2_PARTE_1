@@ -4,7 +4,7 @@
 ?>
 <div class="container-sm mt-5">
     <h2 class="fs-3 fw-bold mt-5 mb-3">Editar libro</h2>
-    <form method="POST" action="<?= BASE_URL ?>editar/<?= $libro->id ?>">
+    <form method="POST" action="<?= BASE_URL ?>editar-libro/<?= $libro->id ?>">
         <div class="mb-3">
             <label class="form-label">Nombre</label>
             <input type="text" class="form-control" name="titulo" value="<?= $libro->titulo ?>"> 
@@ -15,11 +15,11 @@
         </div>
         <div class="mb-3">
             <label class="form-label">Categoría</label>
-            <select class="form-select mb-3" name="genero_nombre">
+            <select class="form-select mb-3" name="genero_id">
                 <option selected><?= $libro->genero_nombre ?></option>
                 <?php 
                     foreach ($generos as $genero){
-                        echo '<option value="' . $genero->nombre. '">' . $genero->nombre. '</option>';
+                        echo '<option value="' . $genero->id. '">' . $genero->nombre. '</option>';
                     }
                 ?>
             </select>        

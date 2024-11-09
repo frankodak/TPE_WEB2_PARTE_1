@@ -105,7 +105,7 @@ class CatalogoController {
             $libro = (new LibroModel())->getLibro($id);
             $generos = (new GeneroModel())->getGeneros();
             if ($libro) {
-                require 'templates/form_edit.phtml';
+                require 'templates/form_edit-libro.phtml';
             } else {
                 $this->showError();
             }
@@ -128,5 +128,28 @@ class CatalogoController {
             }
         }
     }
+
+    public function editarGenero($id) {
+        $genero = $this->modelGenero->getGenero($id);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            if (isset($_POST['nombre'], $_POST['descripcion']) && !empty($_POST['nombre']) && !empty($_POST['descripcion'])) {
+                $nombre = $_POST['nombre'];
+                $descripcion = $_POST['descripcion'];
     
+                $this->modelGenero->editGenero($id, $nombre, $descripcion);
+                header('Location: ' . BASE_URL);
+            } else {
+                echo "Por favor complete todos los campos.";
+            }
+        } else {
+            require_once 'templates/form_edit-genero.phtml';
+        }
+    }
+
+    public function eliminarGenero($id) {
+        $this->modelGenero->deleteGenero($id);
+
+        header("Location: " . BASE_URL);
+    }
+
 }
