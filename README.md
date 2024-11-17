@@ -1,8 +1,8 @@
-# Proyecto: # Milenio 📚
+# Proyecto: Milenio 📚
 
 ## Descripción del Proyecto
 
-Este proyecto es una **# Milenio 📚** diseñada para gestionar géneros literarios, libros y usuarios. Se implementa un sistema de gestión de bases de datos que permite realizar operaciones como crear, leer, actualizar y eliminar en las diferentes tablas de la base de datos. 
+Este proyecto es una biblioteca virtual diseñada para gestionar libros, géneros literarios y usuarios. Se implementa un sistema de gestión de bases de datos que permite realizar operaciones como crear, leer, actualizar y eliminar en las diferentes tablas de la base de datos. 
 
 El sistema está desarrollado en PHP y utiliza **MySQL** como sistema de gestión de bases de datos. Se estructura con un modelo de datos relacional que permite vincular géneros literarios con libros, además de gestionar usuarios con roles específicos para acceder a las funcionalidades del sistema.
 
