@@ -56,21 +56,28 @@
 
         case 'addCatalogo':
             sessionAuthMiddleware($res);
+            verifyAuthMiddleware($res);
             $controller = new CatalogoController($res);
             $controller->addCatalogo();
             break;
 
         case 'addLibro':
+            sessionAuthMiddleware($res);
+            verifyAuthMiddleware($res);
             $controller = new CatalogoController($res);
             $controller->addLibro();
             break;
 
         case 'eliminar-libro':
+            sessionAuthMiddleware($res);
+            verifyAuthMiddleware($res);
             $controller = new CatalogoController($res);
             $controller->deleteLibro();
             break;
 
         case 'editar-libro':
+            sessionAuthMiddleware($res);
+            verifyAuthMiddleware($res);
             if (isset($params[1])) {
                 $controller = new CatalogoController($res);
                 $controller->editLibro($params[1]);
@@ -80,11 +87,15 @@
             break;
 
         case 'addGenero':
+            sessionAuthMiddleware($res);
+            verifyAuthMiddleware($res);
             $controller = new CatalogoController($res);
             $controller->addGenero();
             break;
 
         case 'editar-genero':
+            sessionAuthMiddleware($res);
+            verifyAuthMiddleware($res);
             if (isset($params[1])) {
                 $controller = new CatalogoController($res);
                 $controller->editarGenero($params[1]);
@@ -94,6 +105,8 @@
             break;
 
         case 'eliminar-genero':
+            sessionAuthMiddleware($res);
+            verifyAuthMiddleware($res);
             if (isset($_POST['id'])) {
                 $controller = new CatalogoController($res);
                 $controller->eliminarGenero($_POST['id']);
